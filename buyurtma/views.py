@@ -7,4 +7,7 @@ from .models import *
 
 class SavatView(View):
     def get(self, request):
-        return render(request, 'page-shopping-cart.html')
+        content = {
+            "savatlar":Savat.objects.filter(profil__user=request.user)
+        }
+        return render(request, 'page-shopping-cart.html', content)
