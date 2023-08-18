@@ -58,3 +58,8 @@ class TanlanganView(View):
             'tanlanganlar':Tanlangan.objects.filter(profil__user = request.user)
         }
         return render(request, 'page-profile-wishlist.html',content)
+
+class DelTanlanganView(View):
+    def get(self, request, son):
+        Tanlangan.objects.get(id=son).delete()
+        return redirect('/home/tanlangan/')
