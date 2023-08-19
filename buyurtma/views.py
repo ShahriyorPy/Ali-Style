@@ -44,7 +44,10 @@ class MiqdorKamaytirView(View):
 
 class BuyurtmaView(View):
     def get(self, request):
-        return render(request,'page-profile-orders.html')
+        content = {
+            'buyurtmalar':Buyurtma.objects.filter(profil__user=request.user)
+        }
+        return render(request,'page-profile-orders.html',content)
 
 class SavatOchirView(View):
     def get(self, request, son):
@@ -58,3 +61,22 @@ class TanlanganQoshView(View):
             mahsulot = Mahsulot.objects.get(id=son)
         )
         return redirect('/home/tanlangan/')
+
+class BuyurtmaQoshishView(View):
+    def get(self, request):
+        savatlari = Savat.objects.filter(profil__user=request.user,arxivda=False)
+        buyurtma = Buyurtma.objects.create(
+            manzil = "Shahrixon shahar,Gumbaz ko'chasi",
+            zipcode = "1233212",
+            profil = Profil.objects.get(user=request.user),
+            summa=1200
+        )
+        s = 0
+        for savat in savatlari:
+            buyurtma.savatlar.add(savat)
+            s+=savat.umumiy_summa
+            savat.arxivda = True
+            savat.save()
+        buyurtma.summa=s
+        buyurtma.save()
+        return redirect('/buyurtma/')

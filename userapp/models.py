@@ -6,6 +6,7 @@ class Profil(models.Model):
     ism = models.CharField(max_length=50,null=True)
     jins = models.CharField(max_length=50)
     email = models.CharField(max_length=20,null=True)
+    tel = models.CharField(max_length=30, null=True)
     shahar = models.CharField(max_length=50)
     davlat = models.CharField(max_length=50)
     uy_manzili = models.CharField(max_length=50,null=True)

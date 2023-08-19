@@ -7,5 +7,6 @@ urlpatterns = [
     path('savat_k/<int:son>/',MiqdorKamaytirView.as_view()),
     path('del_savat/<int:son>/',SavatOchirView.as_view()),
     path('tanlangan_qosh/<int:son>/',TanlanganQoshView.as_view()),
-    path('',BuyurtmaView.as_view())
+    path('',BuyurtmaView.as_view()),
+    path("buyurtma_qoshish/",BuyurtmaQoshishView.as_view())
 ]
